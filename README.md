@@ -14,5 +14,5 @@ Payroll Tracking System
 `Bi-Weekly Payroll Calculator This project features a payroll calculator implemented in both R and Ruby scripting languages. The calculator takes user input for the starting day of work ensuring it begins on a Friday. The script then generates a dataset of payroll dates for an entire year adhering to a bi-weekly pay schedule. It calculates the ending date on a Thursday two weeks after the starting date and the pay date on the following Thursday after the end date. In the payroll.rb it calculates the actual amount of the payroll before and after the tax deductions. `
 ## 
 ## {Lang}
-- Ruby
-- R
+- Ruby (VS Code)
+- R (RStudio & VS Code)
