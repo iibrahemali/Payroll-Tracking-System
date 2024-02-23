@@ -1,0 +1,65 @@
+---
+title: "Payroll"
+author: "Ibrahem"
+date: "2023-12-22"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+#### This R script is a payroll calculator designed to generate a dataset of payroll dates for an entire year based on user input. The script calculates the starting date of work on a Friday, the ending date on a Thursday two weeks after, and the pay date on the following Thursday after the end date.
+
+#### Required (data.table) Package
+
+```{r}
+library(data.table)
+
+# Function to calculate payroll data for a bi-weekly schedule
+calculate_payroll_data_biweekly <- function(starting_date) {
+  # Initialize an empty data.frame to store the data
+  payroll_data <- data.frame(
+    Start_Date = as.Date(character()), 
+    End_Date = as.Date(character()), 
+    Pay_Date = as.Date(character())
+  )
+
+  # Find the next Friday from the provided starting date
+  starting_date <- starting_date + (5 - as.numeric(format(starting_date, "%u"))) %% 7
+
+  # Iterate through each bi-week of the year
+  for (biweek in 0:25) {
+    # Calculate the start date, end date, and pay date for each bi-week
+    start_date <- starting_date + (biweek * 14)
+    end_date <- start_date + 13  # Thursday two weeks after
+    pay_date <- end_date + 6 + (5 - as.numeric(format(end_date + 7, "%u"))) %% 7  # Thursday of the next week after ending day
+
+    # Add data to the data.frame
+    payroll_data <- rbind(payroll_data, data.frame(Start_Date = start_date, End_Date = end_date, Pay_Date = pay_date))
+  }
+
+  payroll_data
+}
+
+# Get user input for the starting day
+starting_day <- readline("Enter the starting day of work (YYYY-MM-DD): ")
+
+# Parse the input starting day as a Date object
+starting_date <- as.Date(starting_day)
+
+# Calculate payroll data for the entire year with a bi-weekly schedule
+payroll_data_biweekly <- calculate_payroll_data_biweekly(starting_date)
+
+# Format the payroll data for display
+formatted_payroll_data_biweekly <- data.frame(
+  Start_Date = format(payroll_data_biweekly$Start_Date, "%Y-%m-%d"),
+  End_Date = format(payroll_data_biweekly$End_Date, "%Y-%m-%d"),
+  Pay_Date = format(payroll_data_biweekly$Pay_Date, "%Y-%m-%d")
+)
+
+# Print the formatted payroll data for a bi-weekly schedule
+print(formatted_payroll_data_biweekly)
+
+```
+
+##### 01/12
