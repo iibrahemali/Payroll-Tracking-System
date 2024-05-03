@@ -62,4 +62,6 @@ print(formatted_payroll_data_biweekly)
 
 ```
 
-##### 01/12
+##### Start: 01/12
+##### save the output as csv file
+##### write.csv(payroll_data_biweekly,'payroll_data_biweekly1.csv') 
